@@ -458,7 +458,7 @@ const ImageEditor: React.FC = () => {
           {/* Left panel - Upload and Preview - Takes 7/12 columns on large screens */}
           <div className="lg:col-span-7 space-y-6">
             {/* Upload Button Card - Redesigned */}
-            <Card className="shadow-md overflow-hidden py-0">
+            <Card className="shadow-md overflow-hidden p-0">
               <div className="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-gray-800 dark:to-gray-700 p-5 border-b border-gray-200 dark:border-gray-600">
                 <h3 className="text-lg font-medium text-gray-800 dark:text-white">Upload Gambar</h3>
                 <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">Format yang didukung: JPG, PNG, WebP</p>
@@ -484,20 +484,19 @@ const ImageEditor: React.FC = () => {
                   />
                   
                   <div className="flex justify-between gap-4">
-                    <Button 
+                    {/* <Button 
                       variant="outline" 
                       className="flex-1"
                       onClick={handleReset}
                       disabled={!imageLoaded}
                     >
                       <RotateCcw className="h-4 w-4 mr-2" /> Reset
-                    </Button>
+                    </Button> */}
                     <Button 
                       className="flex-1 bg-blue-600 hover:bg-blue-700 text-white" 
-                      onClick={handleDownload}
-                      disabled={!imageLoaded}
+                      onClick={() => document.getElementById('file-input')?.click()}
                     >
-                      <Download className="h-4 w-4 mr-2" /> Unduh
+                      <ImageIcon className="h-4 w-4 mr-2" /> Upload
                     </Button>
                   </div>
                 </div>
@@ -536,6 +535,18 @@ const ImageEditor: React.FC = () => {
                     </div>
                   )}
                 </div>
+                
+                {/* Tombol Unduh di bawah preview */}
+                {imageLoaded && (
+                  <div className="mt-4">
+                    <Button 
+                      className="w-full bg-green-600 hover:bg-green-700 text-white" 
+                      onClick={handleDownload}
+                    >
+                      <Download className="h-4 w-4 mr-2" /> Unduh Hasil
+                    </Button>
+                  </div>
+                )}
               </CardContent>
             </Card>
           </div>
