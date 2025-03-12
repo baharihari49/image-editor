@@ -1,7 +1,7 @@
-import ImageEditor from "./ImageEditor";
+import ImageEditorPage from "./imageEditor";
 
 export default function Home() {
   return (
-    <ImageEditor/>
+    <ImageEditorPage/>
   );
 }
