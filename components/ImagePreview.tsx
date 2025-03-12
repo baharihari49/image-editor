@@ -1,6 +1,7 @@
 'use client'
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Download, ImageIcon } from 'lucide-react';
@@ -13,9 +14,19 @@ const ImagePreview: React.FC<ImagePreviewProps> = ({
   handleDownload,
   originalImage
 }) => {
+  // State to handle fallback image dimensions
+  const [imageDimensions, setImageDimensions] = useState({ width: 0, height: 0 });
+  const [showFallback, setShowFallback] = useState(false);
+
   // Fallback to show original image if canvas fails
   useEffect(() => {
     if (imageLoaded && outputCanvasRef.current && originalImage) {
+      // Set dimensions for the Image component
+      setImageDimensions({
+        width: originalImage.width || 800,
+        height: originalImage.height || 600
+      });
+
       const ctx = outputCanvasRef.current.getContext('2d');
       if (ctx) {
         // Check if canvas is empty (all black pixels)
@@ -35,10 +46,12 @@ const ImagePreview: React.FC<ImagePreviewProps> = ({
           if (blackPixels > (data.length / 4) * 0.9) {
             console.log('Canvas appears empty, redrawing with original image');
             ctx.drawImage(originalImage, 0, 0, outputCanvasRef.current.width, outputCanvasRef.current.height);
+            setShowFallback(true);
           }
         } catch (e) {
           console.log('Error checking canvas, falling back to original image', e);
           ctx.drawImage(originalImage, 0, 0, outputCanvasRef.current.width, outputCanvasRef.current.height);
+          setShowFallback(true);
         }
       }
     }
@@ -76,20 +89,33 @@ const ImagePreview: React.FC<ImagePreviewProps> = ({
                 </div>
               )}
               
-              {/* Fallback image if canvas is empty */}
-              {imageLoaded && originalImage && (
-                <img 
-                  src={originalImage.src} 
-                  alt="Original" 
-                  style={{
-                    display: 'none', // Initially hidden, used as fallback
-                    maxWidth: '100%',
-                    maxHeight: '400px'
-                  }}
-                  onError={(e) => {
-                    console.log('Error loading fallback image');
-                  }}
-                />
+              {/* Fallback image if canvas is empty - using Next.js Image */}
+              {imageLoaded && originalImage && showFallback && (
+                <div style={{ 
+                  position: 'absolute', 
+                  top: 0, 
+                  left: 0, 
+                  width: '100%', 
+                  height: '100%',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center'
+                }}>
+                  <Image 
+                    src={originalImage.src} 
+                    alt="Original" 
+                    width={imageDimensions.width}
+                    height={imageDimensions.height}
+                    style={{
+                      maxWidth: '100%',
+                      maxHeight: '400px',
+                      objectFit: 'contain'
+                    }}
+                    onError={() => {
+                      console.log('Error loading fallback image');
+                    }}
+                  />
+                </div>
               )}
             </div>
           )}

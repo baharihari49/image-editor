@@ -18,12 +18,22 @@ const ImageEditor: React.FC = () => {
   const [brightness, setBrightness] = useState<number>(0);
   const [contrast, setContrast] = useState<number>(0);
   const [saturation, setSaturation] = useState<number>(0);
+  const [blur, setBlur] = useState<number>(0);
+  const [grayscale, setGrayscale] = useState<number>(0);
+  const [invert, setInvert] = useState<boolean>(false);
+  const [sepia, setSepia] = useState<number>(0);
+  const [hueRotate, setHueRotate] = useState<number>(0);
   
   // Refs to prevent unnecessary re-renders
   const lastAdjustmentRef = useRef<AdjustmentParams>({
     brightness: 0,
     contrast: 0,
-    saturation: 0
+    saturation: 0,
+    blur: 0,
+    grayscale: 0,
+    invert: false,
+    sepia: 0,
+    hueRotate: 0
   });
   const adjustingRef = useRef<boolean>(false);
   const inputCanvasRef = useRef<HTMLCanvasElement | null>(null);
@@ -92,7 +102,12 @@ const ImageEditor: React.FC = () => {
     lastAdjustmentRef.current = {
       brightness,
       contrast,
-      saturation
+      saturation,
+      blur,
+      grayscale,
+      invert,
+      sepia,
+      hueRotate
     };
     
     // Mark as adjusting (but don't show loading overlay)
@@ -122,8 +137,14 @@ const ImageEditor: React.FC = () => {
                   {
                     brightness,
                     contrast,
-                    saturation
-                  }
+                    saturation,
+                    blur,
+                    grayscale,
+                    invert,
+                    sepia,
+                    hueRotate
+                  },
+                  originalImageRef.current
                 );
                 
                 // Fall back to original image if processing fails
@@ -177,7 +198,7 @@ const ImageEditor: React.FC = () => {
       adjustingRef.current = false;
       setAdjusting(false);
     }
-  }, [brightness, contrast, saturation, imageLoaded]);
+  }, [brightness, contrast, saturation, blur, grayscale, invert, sepia, hueRotate, imageLoaded]);
   
   // Handle image upload - fully decoupled
   const handleImageUpload = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
@@ -244,6 +265,11 @@ const ImageEditor: React.FC = () => {
         setBrightness(0);
         setContrast(0);
         setSaturation(0);
+        setBlur(0);
+        setGrayscale(0);
+        setInvert(false);
+        setSepia(0);
+        setHueRotate(0);
         
         // Store original image and mark loaded
         setOriginalImage(img);
@@ -286,7 +312,12 @@ const ImageEditor: React.FC = () => {
     if (
       brightness === lastAdjustmentRef.current.brightness &&
       contrast === lastAdjustmentRef.current.contrast &&
-      saturation === lastAdjustmentRef.current.saturation
+      saturation === lastAdjustmentRef.current.saturation &&
+      blur === lastAdjustmentRef.current.blur &&
+      grayscale === lastAdjustmentRef.current.grayscale &&
+      invert === lastAdjustmentRef.current.invert &&
+      sepia === lastAdjustmentRef.current.sepia &&
+      hueRotate === lastAdjustmentRef.current.hueRotate
     ) {
       return;
     }
@@ -299,7 +330,7 @@ const ImageEditor: React.FC = () => {
     }, 300);
     
     return () => clearTimeout(timer);
-  }, [brightness, contrast, saturation, imageLoaded, processImage]);
+  }, [brightness, contrast, saturation, blur, grayscale, invert, sepia, hueRotate, imageLoaded, processImage]);
   
   // Process once when OpenCV becomes available after image
   useEffect(() => {
@@ -349,6 +380,11 @@ const ImageEditor: React.FC = () => {
     setBrightness(0);
     setContrast(0);
     setSaturation(0);
+    setBlur(0);
+    setGrayscale(0);
+    setInvert(false);
+    setSepia(0);
+    setHueRotate(0);
   }, []);
   
   return (
@@ -382,9 +418,19 @@ const ImageEditor: React.FC = () => {
               brightness={brightness}
               contrast={contrast}
               saturation={saturation}
+              blur={blur}
+              grayscale={grayscale}
+              invert={invert}
+              sepia={sepia}
+              hueRotate={hueRotate}
               setBrightness={setBrightness}
               setContrast={setContrast}
               setSaturation={setSaturation}
+              setBlur={setBlur}
+              setGrayscale={setGrayscale}
+              setInvert={setInvert}
+              setSepia={setSepia}
+              setHueRotate={setHueRotate}
               handleReset={handleReset}
               imageLoaded={imageLoaded}
             />
