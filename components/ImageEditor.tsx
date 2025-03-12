@@ -4,7 +4,6 @@ import React, { useState, useEffect, useRef } from 'react';
 import ImageUpload from './ImageUpload';
 import ImagePreview from './ImagePreview';
 import ImageAdjustments from './ImageAdjustments';
-import { AdjustmentParams } from '../types';
 
 const ImageEditor: React.FC = () => {
   // State for image and canvas
