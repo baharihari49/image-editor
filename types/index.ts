@@ -1,6 +1,6 @@
 // TypeScript interfaces for the image editor components
 
-// Adjustment parameters// Adjustment parameters
+// Adjustment parameters
 export interface AdjustmentParams {
   brightness: number;
   contrast: number;
@@ -11,6 +11,8 @@ export interface AdjustmentParams {
   sepia: number;
   hueRotate: number;
 }
+
+// OpenCV interfaces
 export interface OpenCVMat {
   delete: () => void;
   cols: number;
@@ -75,12 +77,16 @@ export interface OpenCV {
   BORDER_CONSTANT: number;
   BORDER_REFLECT: number;
   BORDER_REPLICATE: number;
+  
+  // Version info
+  version?: string;
 }
 
 // Extend Window interface to include OpenCV
 declare global {
   interface Window {
     cv: OpenCV;
+    checkOpenCV?: () => boolean;
   }
 }
 
@@ -128,6 +134,5 @@ export interface ImagePreviewProps {
   processing: boolean;
   outputCanvasRef: React.RefObject<HTMLCanvasElement | null>;
   handleDownload: () => void;
-  originalImage: HTMLImageElement | null; // Added originalImage property
+  originalImage: HTMLImageElement | null;
 }
-
