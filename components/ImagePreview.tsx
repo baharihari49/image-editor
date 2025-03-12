@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Download, ImageIcon } from 'lucide-react';
 
-// Update interface to include canvas dimensions
+// Update interface to include iOS flag
 interface ImprovedImagePreviewProps {
   imageLoaded: boolean;
   processing: boolean;
@@ -14,6 +14,7 @@ interface ImprovedImagePreviewProps {
   originalImage: HTMLImageElement | null;
   canvasWidth?: number;
   canvasHeight?: number;
+  isIOS?: boolean;
 }
 
 const ImagePreview: React.FC<ImprovedImagePreviewProps> = ({
@@ -21,9 +22,10 @@ const ImagePreview: React.FC<ImprovedImagePreviewProps> = ({
   processing,
   outputCanvasRef,
   handleDownload,
-  // originalImage,
+  originalImage,
   canvasWidth = 0,
-  canvasHeight = 0
+  canvasHeight = 0,
+  isIOS = false
 }) => {
   return (
     <Card className="shadow-md">
@@ -44,7 +46,7 @@ const ImagePreview: React.FC<ImprovedImagePreviewProps> = ({
             </div>
           ) : (
             <div className="relative w-full h-full flex items-center justify-center">
-              {/* Canvas with explicit dimensions and styling for proper display */}
+              {/* Canvas with explicit dimensions - iOS optimized */}
               <canvas 
                 ref={outputCanvasRef} 
                 width={canvasWidth}
@@ -77,9 +79,16 @@ const ImagePreview: React.FC<ImprovedImagePreviewProps> = ({
               onClick={handleDownload}
               disabled={processing}
             >
-              <Download className="h-4 w-4 mr-2" /> Unduh Hasil
+              <Download className="h-4 w-4 mr-2" /> {isIOS ? 'Lihat Hasil' : 'Unduh Hasil'}
             </Button>
           </div>
+        )}
+        
+        {/* iOS specific help text */}
+        {isIOS && imageLoaded && (
+          <p className="mt-2 text-xs text-center text-gray-500">
+            Pada perangkat iOS, gambar akan dibuka di tab baru
+          </p>
         )}
       </CardContent>
     </Card>
