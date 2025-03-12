@@ -136,7 +136,7 @@ const SimpleImageEditor: React.FC = () => {
     if (image) {
       applyEffects();
     }
-  }, [brightness, contrast, saturation, image]);
+  },[brightness, contrast, saturation, image]);
   
   // Reset semua pengaturan
   const handleReset = () => {

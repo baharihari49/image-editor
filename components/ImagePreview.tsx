@@ -22,7 +22,7 @@ const ImagePreview: React.FC<ImprovedImagePreviewProps> = ({
   processing,
   outputCanvasRef,
   handleDownload,
-  originalImage,
+  // originalImage,
   canvasWidth = 0,
   canvasHeight = 0,
   isIOS = false
