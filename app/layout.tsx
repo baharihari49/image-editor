@@ -67,16 +67,16 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: "/favicon.svg" },
-      { url: "/favicon.svg", type: "image/svg+xml" },
+      { url: "https://res.cloudinary.com/du0tz73ma/image/upload/v1741796607/image-editor-logo-simple_hlyev0.svg" },
+      { url: "https://res.cloudinary.com/du0tz73ma/image/upload/v1741796607/image-editor-logo-simple_hlyev0.svg", type: "image/svg+xml" },
     ],
     apple: [
-      { url: "/favicon.svg", type: "image/svg+xml" },
+      { url: "https://res.cloudinary.com/du0tz73ma/image/upload/v1741796607/image-editor-logo-simple_hlyev0.svg", type: "image/svg+xml" },
     ],
     other: [
       {
         rel: "mask-icon",
-        url: "/favicon.svg",
+        url: "https://res.cloudinary.com/du0tz73ma/image/upload/v1741796607/image-editor-logo-simple_hlyev0.svg",
       },
     ],
   },
