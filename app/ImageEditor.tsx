@@ -5,13 +5,47 @@ import { Slider } from '@/components/ui/slider';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
-import { Upload, Download, ImageIcon, RotateCcw } from 'lucide-react';
+import { Download, ImageIcon, RotateCcw } from 'lucide-react';
 
 // TypeScript interfaces
 interface AdjustmentParams {
   brightness: number;
   contrast: number;
   saturation: number;
+}
+
+// More specific OpenCV types
+interface OpenCVMat {
+  delete: () => void;
+  cols: number;
+  rows: number;
+  channels: () => number;
+  convertTo: (dst: OpenCVMat, type: number, alpha: number, beta: number) => void;
+}
+
+interface OpenCVMatVector {
+  delete: () => void;
+  get: (index: number) => OpenCVMat;
+}
+
+interface OpenCV {
+  imread: (canvas: HTMLCanvasElement) => OpenCVMat;
+  imshow: (canvas: HTMLCanvasElement, mat: OpenCVMat) => void;
+  Mat: new () => OpenCVMat;
+  MatVector: new () => OpenCVMatVector;
+  cvtColor: (src: OpenCVMat, dst: OpenCVMat, code: number) => void;
+  convertScaleAbs: (src: OpenCVMat, dst: OpenCVMat, alpha: number, beta: number) => void;
+  split: (src: OpenCVMat, channels: OpenCVMatVector) => void;
+  merge: (channels: OpenCVMatVector, dst: OpenCVMat) => void;
+  COLOR_RGB2HSV: number;
+  COLOR_HSV2RGB: number;
+}
+
+// Extending Window interface
+declare global {
+  interface Window {
+    cv: OpenCV;
+  }
 }
 
 const ImageEditor: React.FC = () => {
@@ -156,8 +190,8 @@ const ImageEditor: React.FC = () => {
       }
       
       // Read input image from canvas
-      let src = window.cv.imread(inputCanvasRef.current);
-      let dst = new window.cv.Mat();
+      const src = window.cv.imread(inputCanvasRef.current);
+      const dst = new window.cv.Mat();
       
       console.log('Image read from canvas:', {
         width: src.cols,
@@ -175,11 +209,11 @@ const ImageEditor: React.FC = () => {
       // Apply saturation adjustment (if not zero)
       if (saturation !== 0) {
         // Convert to HSV for saturation adjustment
-        let hsv = new window.cv.Mat();
+        const hsv = new window.cv.Mat();
         window.cv.cvtColor(dst, hsv, window.cv.COLOR_RGB2HSV);
         
         // Split the HSV channels
-        let channels = new window.cv.MatVector();
+        const channels = new window.cv.MatVector();
         window.cv.split(hsv, channels);
         
         // Adjust saturation channel
@@ -424,7 +458,12 @@ const ImageEditor: React.FC = () => {
           {/* Left panel - Upload and Preview - Takes 7/12 columns on large screens */}
           <div className="lg:col-span-7 space-y-6">
             {/* Upload Button Card - Redesigned */}
-            <Card className="shadow-md overflow-hidden">
+            <Card className="shadow-md overflow-hidden py-0">
+              <div className="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-gray-800 dark:to-gray-700 p-5 border-b border-gray-200 dark:border-gray-600">
+                <h3 className="text-lg font-medium text-gray-800 dark:text-white">Upload Gambar</h3>
+                <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">Format yang didukung: JPG, PNG, WebP</p>
+              </div>
+              
               <CardContent className="p-6">
                 <div className="flex flex-col space-y-4">
                   <div 
@@ -503,7 +542,7 @@ const ImageEditor: React.FC = () => {
           
           {/* Right panel - Adjustments - Takes 5/12 columns on large screens */}
           <div className="lg:col-span-5">
-            <Card className="shadow-md h-full">
+            <Card className="shadow-md h-fit">
               <CardHeader>
                 <CardTitle>Pengaturan Gambar</CardTitle>
                 <CardDescription>
@@ -606,23 +645,5 @@ const ImageEditor: React.FC = () => {
     </div>
   );
 };
-
-// Add OpenCV type definitions for TypeScript
-declare global {
-  interface Window {
-    cv: {
-      imread: (canvas: HTMLCanvasElement) => any;
-      imshow: (canvas: HTMLCanvasElement, mat: any) => void;
-      Mat: any;
-      MatVector: any;
-      cvtColor: (src: any, dst: any, code: number) => void;
-      convertScaleAbs: (src: any, dst: any, alpha: number, beta: number) => void;
-      split: (src: any, channels: any) => void;
-      merge: (channels: any, dst: any) => void;
-      COLOR_RGB2HSV: number;
-      COLOR_HSV2RGB: number;
-    };
-  }
-}
 
 export default ImageEditor;
