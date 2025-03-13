@@ -7,14 +7,14 @@ import { ImageIcon } from 'lucide-react';
 import { ImageUploadProps } from '../types';
 
 const ImageUpload: React.FC<ImageUploadProps> = ({ onImageUpload }) => {
-  // Unique ID untuk input file untuk mencegah konflik jika ada multiple instances
+  // Unique ID for file input to prevent conflicts if there are multiple instances
   const fileInputId = React.useId() + "-file-input";
   
   return (
     <Card className="shadow-md overflow-hidden p-0">
       <div className="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-gray-800 dark:to-gray-700 p-5 border-b border-gray-200 dark:border-gray-600">
-        <h3 className="text-lg font-medium text-gray-800 dark:text-white">Upload Gambar</h3>
-        <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">Format yang didukung: JPG, PNG, WebP</p>
+        <h3 className="text-lg font-medium text-gray-800 dark:text-white">Upload Image</h3>
+        <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">Supported formats: JPG, PNG, WebP</p>
       </div>
       
       <CardContent className="p-6">
@@ -25,7 +25,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ onImageUpload }) => {
           >
             <ImageIcon className="h-8 w-8 text-blue-400 dark:text-blue-300 mb-2" />
             <span className="text-sm font-medium text-gray-600 dark:text-gray-300">
-              Klik untuk memilih gambar
+              Click to select an image
             </span>
           </div>
           <input 

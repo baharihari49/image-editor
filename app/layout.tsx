@@ -13,12 +13,12 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Image Editor | OpenCV.js - Edit Gambar Online",
-  description: "Editor gambar online gratis dengan OpenCV.js. Atur brightness, contrast, dan saturation gambar Anda dengan mudah tanpa perlu software tambahan.",
+  title: "Image Editor | OpenCV.js - Edit Images Online",
+  description: "Free online image editor with OpenCV.js. Adjust the brightness, contrast, and saturation of your images easily without additional software.",
   generator: "Next.js",
   applicationName: "Image Editor",
   referrer: "origin-when-cross-origin",
-  keywords: ["editor gambar", "edit foto", "opencv", "brightness", "contrast", "saturation", "image processing", "web app", "gratis"],
+  keywords: ["image editor", "photo edit", "opencv", "brightness", "contrast", "saturation", "image processing", "web app", "free"],
   authors: [{ name: "Baharihari", url: "https://baharihari.com" }],
   creator: "Baharihari",
   publisher: "Baharihari",
@@ -32,8 +32,8 @@ export const metadata: Metadata = {
     canonical: "/",
   },
   openGraph: {
-    title: "Image Editor | Edit Gambar Online dengan OpenCV.js",
-    description: "Editor gambar online gratis. Sesuaikan brightness, contrast, dan saturation dengan mudah tanpa software tambahan.",
+    title: "Image Editor | Edit Images Online with OpenCV.js",
+    description: "Free online image editor. Adjust brightness, contrast, and saturation easily without additional software.",
     url: "https://image-editor.baharihari.com",
     siteName: "Image Editor",
     images: [
@@ -44,13 +44,13 @@ export const metadata: Metadata = {
         alt: "Image Editor Preview",
       },
     ],
-    locale: "id_ID",
+    locale: "en_US",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Image Editor | Edit Gambar Online dengan OpenCV.js",
-    description: "Editor gambar online gratis. Atur brightness, contrast, dan saturation dengan mudah.",
+    title: "Image Editor | Edit Images Online with OpenCV.js",
+    description: "Free online image editor. Adjust brightness, contrast, and saturation easily.",
     images: ["https://image-editor.baharihari.com/twitter-image.jpg"],
     creator: "@baharihari",
   },
@@ -87,8 +87,8 @@ export const metadata: Metadata = {
     maximumScale: 1,
   },
   verification: {
-    google: "google-site-verification-code", // Ganti dengan kode verifikasi Google Anda
-    yandex: "yandex-verification-code", // Ganti dengan kode verifikasi Yandex Anda jika ada
+    google: "google-site-verification-code", // Replace with your Google verification code
+    yandex: "yandex-verification-code", // Replace with your Yandex verification code if available
   },
   category: "technology",
 };
@@ -99,7 +99,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="id">
+    <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >

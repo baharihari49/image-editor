@@ -33,16 +33,16 @@ const ImageAdjustments: React.FC<ImageAdjustmentsProps> = ({
   return (
     <Card className="shadow-md h-fit">
       <CardHeader>
-        <CardTitle>Pengaturan Gambar</CardTitle>
+        <CardTitle>Image Settings</CardTitle>
         <CardDescription>
-          Sesuaikan parameter untuk mengubah gambar Anda
+          Adjust parameters to modify your image
         </CardDescription>
       </CardHeader>
       <CardContent>
         <Tabs defaultValue="basic" className="mb-6">
           <TabsList className="grid grid-cols-2 w-full">
-            <TabsTrigger value="basic">Dasar</TabsTrigger>
-            <TabsTrigger value="advanced">Lanjutan</TabsTrigger>
+            <TabsTrigger value="basic">Basic</TabsTrigger>
+            <TabsTrigger value="advanced">Advanced</TabsTrigger>
           </TabsList>
           
           <TabsContent value="basic" className="space-y-6">
@@ -54,9 +54,9 @@ const ImageAdjustments: React.FC<ImageAdjustmentsProps> = ({
               step={1}
               disabled={!imageLoaded}
               onChange={setBrightness}
-              leftLabel="Gelap"
+              leftLabel="Dark"
               middleLabel="Normal"
-              rightLabel="Terang"
+              rightLabel="Bright"
             />
             
             <AdjustmentSlider
@@ -67,9 +67,9 @@ const ImageAdjustments: React.FC<ImageAdjustmentsProps> = ({
               step={1}
               disabled={!imageLoaded}
               onChange={setContrast}
-              leftLabel="Rendah"
+              leftLabel="Low"
               middleLabel="Normal"
-              rightLabel="Tinggi"
+              rightLabel="High"
             />
             
             <AdjustmentSlider
@@ -80,7 +80,7 @@ const ImageAdjustments: React.FC<ImageAdjustmentsProps> = ({
               step={1}
               disabled={!imageLoaded}
               onChange={setSaturation}
-              leftLabel="Abu-abu"
+              leftLabel="Gray"
               middleLabel="Normal"
               rightLabel="Vivid"
             />
@@ -158,7 +158,7 @@ const ImageAdjustments: React.FC<ImageAdjustmentsProps> = ({
             onClick={handleReset}
             disabled={!imageLoaded}
           >
-            <RotateCcw className="mr-2 h-4 w-4" /> Reset Semua Pengaturan
+            <RotateCcw className="mr-2 h-4 w-4" /> Reset All Settings
           </Button>
         </div>
       </CardContent>

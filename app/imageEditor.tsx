@@ -9,10 +9,10 @@ const LoadingPlaceholder = () => (
     <div className="text-center">
       <div className="h-12 w-12 border-4 border-t-blue-500 border-r-transparent border-b-blue-300 border-l-blue-600 rounded-full animate-spin mx-auto mb-4"></div>
       <h2 className="text-xl font-semibold text-gray-700 dark:text-gray-200">
-        Memuat Editor Gambar...
+        Loading Image Editor...
       </h2>
       <p className="text-gray-500 dark:text-gray-400 mt-2">
-        Mohon tunggu sementara kami menyiapkan alat pengeditan
+        Please wait while we prepare the editing tools
       </p>
     </div>
   </div>

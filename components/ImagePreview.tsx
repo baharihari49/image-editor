@@ -30,9 +30,9 @@ const ImagePreview: React.FC<ImprovedImagePreviewProps> = ({
   return (
     <Card className="shadow-md">
       <CardHeader className="pb-2">
-        <CardTitle>Preview Hasil</CardTitle>
+        <CardTitle>Preview Results</CardTitle>
         <CardDescription>
-          {imageLoaded ? 'Lihat hasil penyesuaian secara langsung' : 'Unggah gambar untuk mulai mengedit'}
+          {imageLoaded ? 'See adjustment results in real-time' : 'Upload an image to start editing'}
         </CardDescription>
       </CardHeader>
       <CardContent>
@@ -41,7 +41,7 @@ const ImagePreview: React.FC<ImprovedImagePreviewProps> = ({
             <div className="text-center p-6">
               <ImageIcon className="mx-auto h-12 w-12 text-gray-400" />
               <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">
-                Belum ada gambar yang diunggah
+                No image uploaded yet
               </p>
             </div>
           ) : (
@@ -71,7 +71,7 @@ const ImagePreview: React.FC<ImprovedImagePreviewProps> = ({
           )}
         </div>
         
-        {/* Tombol Unduh di bawah preview */}
+        {/* Download button below preview */}
         {imageLoaded && (
           <div className="mt-4">
             <Button 
@@ -79,7 +79,7 @@ const ImagePreview: React.FC<ImprovedImagePreviewProps> = ({
               onClick={handleDownload}
               disabled={processing}
             >
-              <Download className="h-4 w-4 mr-2" /> {isIOS ? 'Lihat Hasil' : 'Unduh Hasil'}
+              <Download className="h-4 w-4 mr-2" /> {isIOS ? 'View Result' : 'Download Result'}
             </Button>
           </div>
         )}
@@ -87,7 +87,7 @@ const ImagePreview: React.FC<ImprovedImagePreviewProps> = ({
         {/* iOS specific help text */}
         {isIOS && imageLoaded && (
           <p className="mt-2 text-xs text-center text-gray-500">
-            Pada perangkat iOS, gambar akan dibuka di tab baru
+            On iOS devices, the image will open in a new tab
           </p>
         )}
       </CardContent>

@@ -5,7 +5,6 @@ import React, { useState, useEffect, useRef } from 'react';
 import ImageUpload from './ImageUpload';
 import ImagePreview from './ImagePreview';
 import ImageAdjustments from './ImageAdjustments';
-import { AdjustmentParams } from '../types';
 
 const ImageEditor: React.FC = () => {
   // State for image and canvas
@@ -452,7 +451,7 @@ const ImageEditor: React.FC = () => {
             <html>
               <head>
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                <title>Simpan Gambar</title>
+                <title>Save Image</title>
                 <style>
                   body {
                     font-family: -apple-system, BlinkMacSystemFont, sans-serif;
@@ -497,15 +496,15 @@ const ImageEditor: React.FC = () => {
                 </style>
               </head>
               <body>
-                <h3>Gambar Siap Disimpan</h3>
+                <h3>Image Ready to Save</h3>
                 <div class="image-container">
-                  <img src="${dataURL}" alt="Gambar Hasil Edit">
+                  <img src="${dataURL}" alt="Edited Image">
                 </div>
                 <div class="instructions">
-                  <strong>Untuk menyimpan gambar di perangkat iOS Anda:</strong>
+                  <strong>To save the image on your iOS device:</strong>
                   <ol>
-                    <li>Sentuh dan tahan gambar di atas</li>
-                    <li>Ketuk "Tambahkan ke Foto" atau "Simpan Gambar"</li>
+                    <li>Touch and hold the image above</li>
+                    <li>Tap "Add to Photos" or "Save Image"</li>
                   </ol>
                 </div>
                 <div class="footer">
@@ -518,7 +517,7 @@ const ImageEditor: React.FC = () => {
           setDebugInfo('Download page opened');
         } else {
           setDebugInfo('Error: Could not open download tab');
-          alert('Mohon izinkan pop-up untuk melihat dan menyimpan gambar');
+          alert('Please allow pop-ups to view and save the image');
         }
       } else {
         // Standard approach for other browsers
@@ -530,7 +529,7 @@ const ImageEditor: React.FC = () => {
       }
     } catch (error) {
       setDebugInfo(`Error downloading: ${error}`);
-      alert('Terjadi kesalahan saat memproses gambar. Silakan coba lagi.');
+      alert('An error occurred while processing the image. Please try again.');
     }
   };
   
@@ -558,18 +557,18 @@ const ImageEditor: React.FC = () => {
       <div className="max-w-5xl mx-auto">
         <div className="mb-8 text-center">
           <h1 className="text-3xl md:text-4xl font-bold mb-2 text-gray-800 dark:text-white">
-            Editor Gambar
+            Image Editor
           </h1>
           <p className="text-gray-600 dark:text-gray-300">
-            Unggah gambar dan sesuaikan brightness, contrast, dan saturation dengan mudah
+            Upload an image and easily adjust brightness, contrast, and saturation
           </p>
           {isIOS && (
-            <p className="text-xs text-orange-500 mt-1">Mode iOS Kompatibel</p>
+            <p className="text-xs text-orange-500 mt-1">iOS Compatible Mode</p>
           )}
           {/* Debug info for iOS troubleshooting */}
           <p className="text-xs text-gray-500 mt-1">{debugInfo}</p>
           {processing && (
-            <p className="text-xs text-blue-500 mt-1 animate-pulse">Memproses gambar...</p>
+            <p className="text-xs text-blue-500 mt-1 animate-pulse">Processing image...</p>
           )}
         </div>
         
